@@ -30,7 +30,7 @@
 				class="add-student-button" />
 
 
-			<table border="1">
+			<table>
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -41,11 +41,15 @@
 					for (Student tempStudent : students) {
 				%> --%>
 				<c:forEach var="tempStudent" items="${student_list}">
+					<c:url var="tempLink" value="StudentControllerServlet">
+						<c:param name="command" value="Load"></c:param>
+						<c:param name="studentId" value="${tempStudent.id}"></c:param>
+					</c:url>
 					<tr>
 						<td>${tempStudent.firstName}</td>
 						<td>${tempStudent.lastName}</td>
 						<td>${tempStudent.email}</td>
-						<!-- <td><a href="update-student-form.jsp"</td> -->
+						<td><a href="${tempLink}">Update</a></td>
 					</tr>
 				</c:forEach>
 				<%-- <tr>
