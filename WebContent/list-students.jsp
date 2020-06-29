@@ -16,18 +16,26 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<u><h2 align="center">Test University</h2></u>
+			<h2 align="center">Test University</h2>
 		</div>
 	</div>
 	<div id="container">
 		<div id="content">
 			<h3 align="center">STUDENTS LIST</h3>
 			<hr>
+
+			<!--Add new button-- to add student to the list  -->
+			<input type="button" value="Add Student"
+				onclick="window.location.href='add-student-form.jsp';return false;"
+				class="add-student-button" />
+
+
 			<table border="1">
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th>
 				</tr>
 				<%-- <%
 					for (Student tempStudent : students) {
@@ -37,6 +45,7 @@
 						<td>${tempStudent.firstName}</td>
 						<td>${tempStudent.lastName}</td>
 						<td>${tempStudent.email}</td>
+						<!-- <td><a href="update-student-form.jsp"</td> -->
 					</tr>
 				</c:forEach>
 				<%-- <tr>

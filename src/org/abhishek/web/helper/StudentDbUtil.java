@@ -1,6 +1,7 @@
 package org.abhishek.web.helper;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -42,7 +43,7 @@ public class StudentDbUtil {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			//close JDBC objects
+			// close JDBC objects
 			close(myConn, stmt, rs);
 		}
 		return students;
@@ -58,6 +59,33 @@ public class StudentDbUtil {
 				myConn.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}
+
+	}
+
+	public void addStudent(Student student) throws SQLException {
+
+		Connection myConn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			// get db connection
+			myConn = dataSource.getConnection();
+
+			// create sql for insert
+			String sql = "INSERT INTO student (first_name,last_name,email) values(?,?,?)";
+			stmt = myConn.prepareStatement(sql);
+
+			// add parameters for student
+			stmt.setString(1, student.getFirstName());
+			stmt.setString(2, student.getLastName());
+			stmt.setString(3, student.getEmail());
+
+			// execute the sql
+			stmt.execute();
+		} finally {
+			// clean up JDBC object
+			close(myConn, stmt, null);
 		}
 
 	}
